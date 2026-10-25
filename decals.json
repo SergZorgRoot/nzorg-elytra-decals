@@ -73,6 +73,13 @@
       "source": "downloaded"
     },
     {
+      "id": "green_wings",
+      "name": "green_wings",
+      "badge": "#22cc22",
+      "full": true,
+      "source": "downloaded, recoloured"
+    },
+    {
       "id": "anniversary_15",
       "name": "anniversary_15",
       "badge": "#8888ff",

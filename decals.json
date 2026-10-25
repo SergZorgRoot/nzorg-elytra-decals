@@ -1,0 +1,419 @@
+{
+  "namespace": "nzorg_elytra",
+  "pack_title": "NZorg Elytra Decals",
+  "decals": [
+    {
+      "id": "star",
+      "name": "star",
+      "badge": "#FFD23F"
+    },
+    {
+      "id": "heart",
+      "name": "heart",
+      "badge": "#FF3B5C"
+    },
+    {
+      "id": "stripes",
+      "name": "stripes",
+      "badge": "#F2F2F2"
+    },
+    {
+      "id": "flame",
+      "name": "flame",
+      "badge": "#FF7A1A"
+    },
+    {
+      "id": "bolt",
+      "name": "bolt",
+      "badge": "#FFF176"
+    },
+    {
+      "id": "n",
+      "name": "n",
+      "badge": "#3DDCFF"
+    },
+    {
+      "id": "ocean",
+      "name": "ocean",
+      "badge": "#2B6CFF",
+      "full": true
+    },
+    {
+      "id": "sergzorg",
+      "name": "sergzorg",
+      "badge": "#2a2a2d",
+      "full": true
+    },
+    {
+      "id": "anniversary_15",
+      "name": "anniversary_15",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "birthday",
+      "name": "birthday",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "blueprint",
+      "name": "blueprint",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "builder",
+      "name": "builder",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "cherry_blossom",
+      "name": "cherry_blossom",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "cobalt",
+      "name": "cobalt",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "common",
+      "name": "common",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "copper",
+      "name": "copper",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "corrupted_creeper",
+      "name": "corrupted_creeper",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "crafter",
+      "name": "crafter",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "db",
+      "name": "db",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "experience",
+      "name": "experience",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "followers",
+      "name": "followers",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "founders",
+      "name": "founders",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "hero",
+      "name": "hero",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "home",
+      "name": "home",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "jack_black_blue",
+      "name": "jack_black_blue",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "jack_black_gray",
+      "name": "jack_black_gray",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "jack_black_red",
+      "name": "jack_black_red",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "mcc_15",
+      "name": "mcc_15",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "menace",
+      "name": "menace",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "migration",
+      "name": "migration",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "millonth_customer",
+      "name": "millonth_customer",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "minecon_2011",
+      "name": "minecon_2011",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "minecon_2012",
+      "name": "minecon_2012",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "minecon_2013",
+      "name": "minecon_2013",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "minecon_2015",
+      "name": "minecon_2015",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "minecon_2016",
+      "name": "minecon_2016",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "mojang",
+      "name": "mojang",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "mojang_classic",
+      "name": "mojang_classic",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "mojang_office",
+      "name": "mojang_office",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "mojang_studios",
+      "name": "mojang_studios",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "mojira",
+      "name": "mojira",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "moonlight_trail",
+      "name": "moonlight_trail",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "oxeye",
+      "name": "oxeye",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "pan",
+      "name": "pan",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "prismarine",
+      "name": "prismarine",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "progress_pride",
+      "name": "progress_pride",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "purple_heart",
+      "name": "purple_heart",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "realms",
+      "name": "realms",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "scrolls",
+      "name": "scrolls",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "snowman",
+      "name": "snowman",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "soul",
+      "name": "soul",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "spade",
+      "name": "spade",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "special",
+      "name": "special",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "test",
+      "name": "test",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "translator",
+      "name": "translator",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "turtle",
+      "name": "turtle",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "twisted",
+      "name": "twisted",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "valentine",
+      "name": "valentine",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "vanilla",
+      "name": "vanilla",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "yearn",
+      "name": "yearn",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    },
+    {
+      "id": "zombie_horse",
+      "name": "zombie_horse",
+      "badge": "#8888ff",
+      "full": true,
+      "source": "XAVI333"
+    }
+  ]
+}

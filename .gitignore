@@ -1,0 +1,5 @@
+out/
+third_party/mcaselector-*.jar
+third_party/originals/
+.DS_Store
+__pycache__/

@@ -106,6 +106,22 @@ def build_datapack(decals):
     ]
     files[f'data/{NS}/function/apply.mcfunction'] = '\n'.join(apply) + '\n'
 
+    # greeting: /function <NS>:greet broadcasts it; every player also gets it once, on first login
+    greet = ('tellraw @a [{text:"Elytra decals! ",color:aqua,bold:true},'
+             '{text:"Install the resource pack: ",color:gray},'
+             '{text:"tinyurl.com/nzorg-elytra",color:yellow,underlined:true,'
+             'click_event:{action:open_url,url:"https://tinyurl.com/nzorg-elytra"},'
+             'hover_event:{action:show_text,value:"Download NZorg Elytra Decals RP.zip"}},'
+             '{text:"\\nThen rename an elytra in an anvil to e.g. ",color:gray},'
+             '{text:"sergzorg, ocean, cobalt, cherry_blossom",color:white},'
+             '{text:" and equip it. Rename to Default to reset.",color:gray}]\n')
+    files[f'data/{NS}/function/greet.mcfunction'] = greet
+    files[f'data/{NS}/function/greet_player.mcfunction'] = greet.replace('tellraw @a', 'tellraw @s')
+    files[f'data/{NS}/advancement/greeted.json'] = j({
+        'criteria': {'login': {'trigger': 'minecraft:tick'}},
+        'rewards': {'function': f'{NS}:greet_player'},
+    })
+
     for d in decals:
         asset = f'{NS}:{d["id"]}'
         files[f'data/{NS}/function/give/{d["id"]}.mcfunction'] = (

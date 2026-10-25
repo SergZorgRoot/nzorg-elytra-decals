@@ -7,7 +7,9 @@ Minecraft Java 26.3.
 **Download:** grab `NZorg Elytra Decals RP.zip` from the
 [latest release](https://github.com/SergZorgRoot/nzorg-elytra-decals/releases/latest) and drop it
 into your `resourcepacks` folder (Options → Resource Packs → Open Pack Folder), then enable it.
+Short link: https://tinyurl.com/nzorg-elytra
 Realm owners also need `NZorg Elytra Decals DP.zip` in the world's `datapacks` folder.
+Every player gets a one-time greeting with the link on login; `/function nzorg_elytra:greet` repeats it for all.
 
 ## How players use it
 1. Install the resource pack (from the release, or `out/` after building) via Options → Resource Packs.

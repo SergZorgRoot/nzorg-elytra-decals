@@ -52,6 +52,27 @@
       "source": "Doctor_CZ"
     },
     {
+      "id": "dragon",
+      "name": "dragon",
+      "badge": "#041795",
+      "full": true,
+      "source": "downloaded"
+    },
+    {
+      "id": "galaxy",
+      "name": "galaxy",
+      "badge": "#02fdda",
+      "full": true,
+      "source": "downloaded"
+    },
+    {
+      "id": "green_dragon",
+      "name": "green_dragon",
+      "badge": "#00ff00",
+      "full": true,
+      "source": "downloaded"
+    },
+    {
       "id": "anniversary_15",
       "name": "anniversary_15",
       "badge": "#8888ff",

@@ -1,4 +1,4 @@
-"""green_wings: the purple wings texture hue-shifted so every purple shade becomes the matching green
+"""sergzorg (formerly green_wings): the purple wings texture hue-shifted so every purple shade becomes the matching green
 shade (saturation and brightness untouched). Target hue is taken from the green icon."""
 import colorsys, statistics
 from PIL import Image
@@ -19,5 +19,5 @@ for y in range(src.height):
             h = (h + shift) % 1.0
         nr, ng, nb = colorsys.hsv_to_rgb(h, s, v)
         px[x, y] = (round(nr*255), round(ng*255), round(nb*255), a)
-out.save('decals/green_wings.png'); ic.save('icons/green_wings.png')
-print(f'target hue {target*360:.0f} deg, shift {shift*360:+.0f} deg; written decals/green_wings.png + icons/green_wings.png')
+out.save('decals/sergzorg.png'); ic.save('icons/sergzorg.png')
+print(f'target hue {target*360:.0f} deg, shift {shift*360:+.0f} deg; written decals/sergzorg.png + icons/sergzorg.png')

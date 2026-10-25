@@ -20,5 +20,5 @@ for y in range(32):
             v += 18
         v = max(0, min(72, v))
         out.putpixel((x, y), (v, v, v + 3, 255)) # hint of cold blue in the black
-out.save('decals/sergzorg.png')
+out.save('decals/sergzorg_0.png')
 print('decals/sergzorg.png written')

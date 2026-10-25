@@ -11,6 +11,8 @@ Short link: https://tinyurl.com/nzorg-elytra
 Realm owners also need `NZorg Elytra Decals DP.zip` in the world's `datapacks` folder.
 Every player gets a one-time greeting with the link on login; `/function nzorg_elytra:greet` repeats it for all.
 
+![gallery](gallery.png)
+
 ## How players use it
 1. Install the resource pack (from the release, or `out/` after building) via Options → Resource Packs.
 2. Rename an elytra in an anvil to a decal id (lowercase, no spaces): `star`, `heart`, `stripes`,

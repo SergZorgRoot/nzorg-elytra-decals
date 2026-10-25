@@ -45,6 +45,13 @@
       "full": true
     },
     {
+      "id": "bat_wings",
+      "name": "bat_wings",
+      "badge": "#3a2a4a",
+      "full": true,
+      "source": "Doctor_CZ"
+    },
+    {
       "id": "anniversary_15",
       "name": "anniversary_15",
       "badge": "#8888ff",

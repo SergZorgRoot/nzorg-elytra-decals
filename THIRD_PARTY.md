@@ -8,3 +8,5 @@
   painting reference; they are Minecraft assets and remain Mojang's property.
 - **MCA Selector** by Querz — https://github.com/Querz/mcaselector, MIT. Downloaded on demand by
   `prepare_upload.sh`.
+- **Bat wings skin for Elytra by Doctor_CZ** — `bat_wings` (wing texture and icon, unmodified), from the
+  original resource pack. No licence was supplied with it; included with credit for private use.

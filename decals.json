@@ -80,6 +80,13 @@
       "source": "downloaded, recoloured"
     },
     {
+      "id": "demon",
+      "name": "demon",
+      "badge": "#b01818",
+      "full": true,
+      "source": "downloaded"
+    },
+    {
       "id": "anniversary_15",
       "name": "anniversary_15",
       "badge": "#8888ff",

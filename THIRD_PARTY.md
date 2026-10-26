@@ -10,5 +10,5 @@
   `prepare_upload.sh`.
 - **Bat wings skin for Elytra by Doctor_CZ** — `bat_wings` (wing texture and icon, unmodified), from the
   original resource pack. No licence was supplied with it; included with credit for private use.
-- **green_dragon, galaxy, dragon, sergzorg** (sergzorg = the purple wings texture hue-shifted to green, icon as supplied) — wing textures downloaded by the Realm owner (authors unknown),
+- **green_dragon, galaxy, dragon, demon, sergzorg** (sergzorg = the purple wings texture hue-shifted to green, icon as supplied) — wing textures downloaded by the Realm owner (authors unknown),
   included unmodified for private use. If you are the author and want credit or removal, open an issue.

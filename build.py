@@ -135,11 +135,12 @@ def build_datapack(decals):
              '{text:"tinyurl.com/nzorg-elytra",color:yellow,underlined:true,'
              'click_event:{action:open_url,url:"https://tinyurl.com/nzorg-elytra"},'
              'hover_event:{action:show_text,value:"Download NZorg Elytra Decals RP.zip"}},'
-             '{text:"\\nThen rename an elytra in an anvil to e.g. ",color:gray},'
+             '{text:"",color:gray}]\n'
+             'tellraw @a [{text:"Rename an elytra or armored elytra in an anvil to e.g. ",color:gray},'
              '{text:"sergzorg, ocean, cobalt, cherry_blossom",color:white},'
-             '{text:" and equip it. Rename to Default to reset.",color:gray}]\n')
+             '{text:". Rename to Default to reset.",color:gray}]\n')
     files[f'data/{NS}/function/greet.mcfunction'] = greet
-    files[f'data/{NS}/function/greet_player.mcfunction'] = greet.replace('tellraw @a', 'tellraw @s')
+    files[f'data/{NS}/function/greet_player.mcfunction'] = greet.replace('tellraw @a', 'tellraw @s')  # both lines
     # ---- armoured elytra: chestplate + elytra (+ phantom membrane) in a smithing table ----
     files[f'data/{NS}/tags/item/chestplates.json'] = j({'values': [f'minecraft:{it}' for it, _, _ in MATERIALS]})
     for it, mat, _ in MATERIALS:
@@ -228,6 +229,15 @@ def build_resourcepack(decals):
             import io
             buf = io.BytesIO(); badge_icon(d['badge']).save(buf, 'PNG')
             files[f'assets/{NS}/textures/item/{d["id"]}.png'] = buf.getvalue()
+    # trims are drawn on every layer of a trimmed chestplate, wings included, but vanilla has no
+    # wing-shaped trim textures (elytra can't be trimmed): ship transparent ones so the wings
+    # don't render the purple/black missing texture
+    import io
+    blank = io.BytesIO(); Image.new('RGBA', (64, 32), (0, 0, 0, 0)).save(blank, 'PNG')
+    meta = j({'palette': {'base_palette': 'trim_base'}})
+    for pat in (ROOT / 'vanilla' / 'trim_patterns.txt').read_text().split():
+        files[f'assets/minecraft/textures/trims/entity/wings/{pat}.png'] = blank.getvalue()
+        files[f'assets/minecraft/textures/trims/entity/wings/{pat}.png.mcmeta'] = meta
     # armoured elytra: vanilla chestplate layers (incl. leather dye + trim palettes) + wings, per decal
     for _, mat, _ in MATERIALS:
         base = json.loads((ROOT / 'vanilla' / 'equipment' / f'{mat}.json').read_text())

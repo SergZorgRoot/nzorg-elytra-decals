@@ -17,5 +17,6 @@ for dim in overworld the_nether the_end; do
     --region "$D/region" --poi "$D/poi" --entities "$D/entities" --query "InhabitedTime < 1" >/dev/null 2>&1
 done
 mkdir -p "$DST/datapacks"
+rm -rf "$DST/datapacks/NZorg Elytra Decals DP.zip"  # Realm backups store it unpacked under the zip name
 cp "$HERE/out/NZorg Elytra Decals DP.zip" "$DST/datapacks/"
 echo "ready: $DST"; du -sh "$DST"; ls "$DST/datapacks"

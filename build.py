@@ -31,6 +31,23 @@ ELYTRA_SOUND = 'minecraft:item.armor.equip_elytra'
 SLOTS = ['armor.chest', 'weapon.mainhand', 'weapon.offhand']
 
 
+# armoured elytra: (chestplate item, vanilla equipment asset, equip sound suffix)
+MATERIALS = [('leather_chestplate', 'leather', 'leather'), ('chainmail_chestplate', 'chainmail', 'chain'),
+             ('copper_chestplate', 'copper', 'copper'), ('iron_chestplate', 'iron', 'iron'),
+             ('golden_chestplate', 'gold', 'gold'), ('diamond_chestplate', 'diamond', 'diamond'),
+             ('netherite_chestplate', 'netherite', 'netherite')]
+
+
+def wing_layers(d):
+    """Equipment 'wings' layers for a decal entry (None = plain vanilla wings, cape-aware)."""
+    vanilla = {'texture': 'minecraft:elytra', 'use_player_texture': True}
+    if d is None:
+        return [vanilla]
+    if d.get('full'):
+        return [{'texture': f'{NS}:{d["id"]}'}]            # whole-wing texture
+    return [vanilla, {'texture': f'{NS}:{d["id"]}'}]       # decal over vanilla wings
+
+
 def equippable(asset_id):
     return {'slot': 'chest', 'equip_sound': ELYTRA_SOUND, 'asset_id': asset_id, 'damage_on_hurt': False}
 
@@ -62,8 +79,13 @@ def build_datapack(decals):
         f'tellraw @a [{{"text":"[{TITLE}] ","color":"aqua","bold":true}},'
         f'{{"text":"loaded. Rename an elytra to a decal id (e.g. {", ".join(d["id"] for d in decals[:4])}) or Default","color":"gray"}}]\n')
     files[f'data/{NS}/advancement/elytra_changed.json'] = j({
-        'criteria': {'elytra_changed': {'trigger': 'minecraft:inventory_changed',
-                                        'conditions': {'items': [{'items': 'minecraft:elytra'}]}}},
+        'criteria': {
+            'elytra_changed': {'trigger': 'minecraft:inventory_changed',
+                               'conditions': {'items': [{'items': 'minecraft:elytra'}]}},
+            'armored_changed': {'trigger': 'minecraft:inventory_changed',
+                                'conditions': {'items': [{'items': f'#{NS}:chestplates', 'components': {'minecraft:glider': {}}}]}},
+        },
+        'requirements': [['elytra_changed', 'armored_changed']],
         'rewards': {'function': f'{NS}:on_elytra_changed'},
     })
     files[f'data/{NS}/function/revoke.mcfunction'] = f'advancement revoke @a only {NS}:elytra_changed\n'  # scheduled: no @s
@@ -73,6 +95,7 @@ def build_datapack(decals):
     slots += [(f'inventory.{i}', f'Inventory[{{Slot:{i + 9}b}}]') for i in range(27)]
     lines = [f'schedule function {NS}:revoke 1t']
     lines += [f'function {NS}:check {{slot:"{slot}",path:"{path}"}}' for slot, path in slots]
+    lines += [f'function {NS}:armor_check {{slot:"{slot}",path:"{path}"}}' for slot, path in slots]
     files[f'data/{NS}/function/on_elytra_changed.mcfunction'] = '\n'.join(lines) + '\n'
 
     # item_model is a default component on every item, so setting it back to minecraft:elytra leaves a clean item
@@ -117,6 +140,45 @@ def build_datapack(decals):
              '{text:" and equip it. Rename to Default to reset.",color:gray}]\n')
     files[f'data/{NS}/function/greet.mcfunction'] = greet
     files[f'data/{NS}/function/greet_player.mcfunction'] = greet.replace('tellraw @a', 'tellraw @s')
+    # ---- armoured elytra: chestplate + elytra (+ phantom membrane) in a smithing table ----
+    files[f'data/{NS}/tags/item/chestplates.json'] = j({'values': [f'minecraft:{it}' for it, _, _ in MATERIALS]})
+    for it, mat, _ in MATERIALS:
+        files[f'data/{NS}/recipe/armored_{mat}.json'] = j({
+            'type': 'minecraft:smithing_transform',
+            'template': 'minecraft:phantom_membrane',
+            'base': f'minecraft:{it}',
+            'addition': 'minecraft:elytra',
+            'result': {'id': f'minecraft:{it}', 'components': {
+                'minecraft:glider': {},
+                'minecraft:lore': [{'text': 'Armored Elytra', 'color': 'aqua', 'italic': False}]}},
+        })
+        files[f'data/{NS}/function/give_armored/{mat}.mcfunction'] = (
+            f'give @s minecraft:{it}[minecraft:glider={{}},minecraft:lore=[{{text:"Armored Elytra",color:"aqua",italic:false}}]]\n')
+    known = ','.join(f'{d["id"]}:1b' for d in decals)
+    files[f'data/{NS}/function/load.mcfunction'] += f'data modify storage {NS}:decals known set value {{{known}}}\n'
+    armor = [
+        f'$execute unless items entity @s $(slot) #{NS}:chestplates[minecraft:glider] run return 0',
+        f'data modify storage {NS}:tmp key set value "wings"',
+        f'$data modify storage {NS}:tmp slot set value "$(slot)"',
+        f'$data modify storage {NS}:tmp path set value "$(path)"',
+    ]
+    for it, mat, snd in MATERIALS:
+        armor.append(f'$execute if items entity @s $(slot) minecraft:{it} run data modify storage {NS}:tmp mat set value "{mat}"')
+        armor.append(f'$execute if items entity @s $(slot) minecraft:{it} run data modify storage {NS}:tmp snd set value "{snd}"')
+    armor += [
+        f'$execute if items entity @s $(slot) *[minecraft:custom_name] run data modify storage {NS}:tmp name set from entity @s $(path).components."minecraft:custom_name"',
+        # only known decal ids are used on armour (an unknown name would make the whole chestplate invisible)
+        f'$execute if items entity @s $(slot) *[minecraft:custom_name] run function {NS}:armor_name with storage {NS}:tmp',
+        f'function {NS}:armor_apply with storage {NS}:tmp',
+    ]
+    files[f'data/{NS}/function/armor_check.mcfunction'] = '\n'.join(armor) + '\n'
+    files[f'data/{NS}/function/armor_name.mcfunction'] = (
+        f'$execute if data storage {NS}:decals known.$(name) run data modify storage {NS}:tmp key set value "$(name)"\n')
+    files[f'data/{NS}/function/armor_apply.mcfunction'] = (
+        f'$execute unless data entity @s $(path).components."minecraft:equippable"{{asset_id:"{NS}:$(mat)__$(key)"}} '
+        f'run item modify entity @s $(slot) {{type:"minecraft:set_components",components:{{"minecraft:equippable":'
+        f'{{slot:"chest",equip_sound:"minecraft:item.armor.equip_$(snd)",asset_id:"{NS}:$(mat)__$(key)"}}}}}}\n')
+
     files[f'data/{NS}/advancement/greeted.json'] = j({
         'criteria': {'login': {'trigger': 'minecraft:tick'}},
         'rewards': {'function': f'{NS}:greet_player'},
@@ -150,14 +212,7 @@ def build_resourcepack(decals):
         img = Image.open(png).convert('RGBA')
         if img.size[0] != 2 * img.size[1]:
             sys.exit(f'{png}: expected a 2:1 texture (64x32, 128x64, 256x128 ...), got {img.size}')
-        if d.get('full'):
-            # whole-wing texture: replaces the vanilla wings (and any cape) completely
-            layers = [{'texture': f'{NS}:{d["id"]}'}]
-        else:
-            # decal: drawn on top of the vanilla wings, capes still show through
-            layers = [{'texture': 'minecraft:elytra', 'use_player_texture': True},
-                      {'texture': f'{NS}:{d["id"]}'}]
-        files[f'assets/{NS}/equipment/{d["id"]}.json'] = j({'layers': {'wings': layers}})
+        files[f'assets/{NS}/equipment/{d["id"]}.json'] = j({'layers': {'wings': wing_layers(d)}})
         files[f'assets/{NS}/textures/entity/equipment/wings/{d["id"]}.png'] = png.read_bytes()
         files[f'assets/{NS}/items/{d["id"]}.json'] = j({'model': {
             'type': 'minecraft:condition', 'property': 'minecraft:broken',
@@ -173,6 +228,13 @@ def build_resourcepack(decals):
             import io
             buf = io.BytesIO(); badge_icon(d['badge']).save(buf, 'PNG')
             files[f'assets/{NS}/textures/item/{d["id"]}.png'] = buf.getvalue()
+    # armoured elytra: vanilla chestplate layers (incl. leather dye + trim palettes) + wings, per decal
+    for _, mat, _ in MATERIALS:
+        base = json.loads((ROOT / 'vanilla' / 'equipment' / f'{mat}.json').read_text())
+        layers = {k: v for k, v in base['layers'].items() if k in ('humanoid', 'humanoid_baby')}
+        for key, d in [('wings', None)] + [(d['id'], d) for d in decals]:
+            asset = dict(base, layers=dict(layers, wings=wing_layers(d)))
+            files[f'assets/{NS}/equipment/{mat}__{key}.json'] = j(asset)
     return files
 
 

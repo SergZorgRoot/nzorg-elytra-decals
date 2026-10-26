@@ -25,6 +25,16 @@ Every player gets a one-time greeting with the link on login; `/function nzorg_e
 
 Decals are drawn as a second layer on top of the normal wings, so capes still show.
 
+## Armored elytra (chestplate + elytra)
+In a smithing table put **phantom membrane** (template), any **chestplate** (base) and an **elytra**
+(addition). The result is the same chestplate, with its enchantments, durability, trim and dye,
+that can also glide. On the player it shows the armour *and* the wings.
+- Rename it to a decal id (e.g. `cobalt`, `sergzorg`) for decal wings. Unknown names give plain wings.
+- Works for leather, chainmail, copper, iron, gold, diamond and netherite. Netherite-upgrading an
+  armored diamond chestplate keeps the wings.
+- The elytra's own enchantments are not kept; the flight wears down the chestplate's durability.
+- Ops: `/function nzorg_elytra:give_armored/<material>` (e.g. `netherite`).
+
 ## Adding your own decals
 - Put a 64x32 PNG in `decals/` (transparent everywhere except the wing face, roughly x 34-45, y 3-21;
   see `vanilla/elytra_wings.png` for the layout, or edit the ASCII art in `make_samples.py`).

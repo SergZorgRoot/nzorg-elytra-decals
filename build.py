@@ -129,18 +129,22 @@ def build_datapack(decals):
     ]
     files[f'data/{NS}/function/apply.mcfunction'] = '\n'.join(apply) + '\n'
 
-    # greeting: /function <NS>:greet broadcasts it; every player also gets it once, on first login
-    greet = ('tellraw @a [{text:"Elytra decals! ",color:aqua,bold:true},'
-             '{text:"Install the resource pack: ",color:gray},'
-             '{text:"tinyurl.com/nzorg-elytra",color:yellow,underlined:true,'
-             'click_event:{action:open_url,url:"https://tinyurl.com/nzorg-elytra"},'
-             'hover_event:{action:show_text,value:"Download NZorg Elytra Decals RP.zip"}},'
-             '{text:"",color:gray}]\n'
+    # greeting: /function <NS>:greet broadcasts it; every player also gets it once, on first login.
+    # Links both resource packs; the Elder Anvil part only shows when that data pack is in the world.
+    link = lambda url, label: (f'{{text:"tinyurl.com/{url}",color:yellow,underlined:true,'
+                               f'click_event:{{action:open_url,url:"https://tinyurl.com/{url}"}},'
+                               f'hover_event:{{action:show_text,value:"Download {label}"}}}}')
+    anvil = 'execute if data storage nzorg_anvil:r r run '
+    greet = ('tellraw @a [{text:"Welcome! ",color:aqua,bold:true},{text:"Install the resource packs:",color:gray}]\n'
+             'tellraw @a [{text:" Elytra Decals: ",color:gray},' + link('nzorg-elytra', 'NZorg Elytra Decals RP.zip') + ']\n' +
+             anvil + 'tellraw @a [{text:" Elder Anvil: ",color:gray},' + link('nzorg-elder-anvil', 'NZorg Elder Anvil RP.zip') + ']\n'
              'tellraw @a [{text:"Rename an elytra or armored elytra in an anvil to e.g. ",color:gray},'
-             '{text:"sergzorg, ocean, cobalt, cherry_blossom",color:white},'
-             '{text:". Rename to Default to reset.",color:gray}]\n')
+             '{text:"sergzorg, demon, ocean, cobalt",color:white},'
+             '{text:". Rename to Default to reset.",color:gray}]\n' +
+             anvil + 'tellraw @a [{text:"Craft an anvil from netherite for an ",color:gray},'
+             '{text:"Elder Anvil",color:dark_aqua},{text:": it unmakes crafted items.",color:gray}]\n')
     files[f'data/{NS}/function/greet.mcfunction'] = greet
-    files[f'data/{NS}/function/greet_player.mcfunction'] = greet.replace('tellraw @a', 'tellraw @s')  # both lines
+    files[f'data/{NS}/function/greet_player.mcfunction'] = greet.replace('tellraw @a', 'tellraw @s')  # all lines
     # ---- armoured elytra: chestplate + elytra (+ phantom membrane) in a smithing table ----
     files[f'data/{NS}/tags/item/chestplates.json'] = j({'values': [f'minecraft:{it}' for it, _, _ in MATERIALS]})
     for it, mat, _ in MATERIALS:
@@ -180,7 +184,7 @@ def build_datapack(decals):
         f'run item modify entity @s $(slot) {{type:"minecraft:set_components",components:{{"minecraft:equippable":'
         f'{{slot:"chest",equip_sound:"minecraft:item.armor.equip_$(snd)",asset_id:"{NS}:$(mat)__$(key)"}}}}}}\n')
 
-    files[f'data/{NS}/advancement/greeted.json'] = j({
+    files[f'data/{NS}/advancement/greeted_v2.json'] = j({   # v2: new message with both links
         'criteria': {'login': {'trigger': 'minecraft:tick'}},
         'rewards': {'function': f'{NS}:greet_player'},
     })

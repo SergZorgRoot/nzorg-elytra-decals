@@ -1,6 +1,7 @@
 #!/bin/zsh
 # Usage: ./prepare_upload.sh "<path to freshly downloaded Realm backup world>"
-# Makes "<world> UPLOAD" next to it: never-visited chunks pruned, both elytra data packs added.
+# Makes "<world> UPLOAD" next to it: never-visited chunks pruned, the elytra data pack added
+# (plus the Elder Anvil data pack from ~/projects/nzorg-elder-anvil when it has been built).
 set -e
 SRC="$1"; [ -f "$SRC/level.dat" ] || { echo "not a world folder: $SRC"; exit 1; }
 DST="${SRC} UPLOAD"
@@ -19,4 +20,6 @@ done
 mkdir -p "$DST/datapacks"
 rm -rf "$DST/datapacks/NZorg Elytra Decals DP.zip"  # Realm backups store it unpacked under the zip name
 cp "$HERE/out/NZorg Elytra Decals DP.zip" "$DST/datapacks/"
+ANVIL="$HOME/projects/nzorg-elder-anvil/out/NZorg Elder Anvil DP.zip"
+[ -f "$ANVIL" ] && cp "$ANVIL" "$DST/datapacks/"
 echo "ready: $DST"; du -sh "$DST"; ls "$DST/datapacks"
